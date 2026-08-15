@@ -2,7 +2,7 @@
 
 Crack the password before the trace finds you.
 
-Hackman is a password-guessing game that lives entirely in one HTML file. Guess letters and digits to reveal a password assembled from dictionary words, working from the definitions as your only clue, against a countdown and a limited number of wrong guesses. Every miss advances the trace, and the world visibly degrades as it closes in.
+Hackman is a password-guessing game that lives entirely in one HTML file. It plays like hangman, with a word list that is fine for children (roughly PG-13): guess letters and digits to reveal a password assembled from dictionary words, working from the definitions as your only clue, against a countdown and a limited number of wrong guesses. Every miss advances the trace, and the world visibly degrades as it closes in.
 
 ![The difficulty menu](docs/menu.png)
 
@@ -18,7 +18,7 @@ python3 -m http.server 8000   # then open http://localhost:8000/hackman.html
 
 ## How it works
 
-The password is one to three dictionary words joined together, with a digit appended per word. You are shown each word's dictionary definition and nothing else. Guess a letter or digit and every matching position reveals at once; guess wrong and the trace advances.
+The rules are hangman's, dressed as a break-in. The password is one to three dictionary words joined together, with a digit appended per word. You are shown each word's dictionary definition and nothing else. Guess a letter or digit and every matching position reveals at once; guess wrong and the trace advances.
 
 ![A round in progress](docs/play.png)
 
@@ -65,6 +65,8 @@ var wordlist = {
 };
 ```
 
+The shipped list is family-friendly — think PG-13. There is no profanity or explicit content in the words or their definitions; the definitions come from an old dictionary, so the closest they get is the odd clinical or old-fashioned reference. It is suitable for children and for classroom use.
+
 To add words, paste more entries in the same shape. Nothing reads the list directly — a filter runs once at startup and keeps only lowercase, letters-only entries between 4 and 9 characters, so entries outside that range are ignored rather than breaking a round. Definitions are shown in full, with the type size stepping down on the rare entry long enough to need it.
 
 ## Under the hood
@@ -74,3 +76,7 @@ One self-contained file, no dependencies and no assets. It holds a small 2D canv
 The whole scene is drawn procedurally each frame — the gradient sky, the sliced sun, the scrolling perspective grid, the glyph rain, the particles — and every sound is synthesised with the WebAudio API, so there is nothing to download and nothing to embed. Layout is authored against a fixed 1920×1080 space and letterboxed into the window with a single uniform scale, so it holds together at any size without stretching.
 
 `CLAUDE.md` documents the architecture in more detail.
+
+## License
+
+Hackman is released under the [PolyForm Noncommercial License 1.0.0](LICENSE.md). You are free to play it, copy it, modify it and share it for any noncommercial purpose — personal use, education, charities and the like. Using it, or anything built from it, to make money is not permitted.
